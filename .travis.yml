@@ -15,7 +15,8 @@ jobs:
       install:
         - pip3 install -r requirements.txt
       script: echo $FOO
-    - name: QGIS Server
+    - stage: Run tests QGIS Server
+      name: Job 2
       install:
         - pip3 install mock
       script: echo "Running job 2"
