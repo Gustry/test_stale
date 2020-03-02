@@ -5,16 +5,15 @@ dist: bionic
 python:
   - 3.7
 
+env:
+  - FOO=QGIS_3.4
+  - FOO=QGIS_latest
+install:
+  - pip3 install -r requirements.txt
+script: echo $FOO
+
 jobs:
   include:
-    - stage: Run tests QGIS Desktop
-      env:
-        - FOO=QGIS_3.4
-        - FOO=QGIS_latest
-      name: Job 1
-      install:
-        - pip3 install -r requirements.txt
-      script: echo $FOO
     - stage: Run tests QGIS Server
       name: Job 2
       install:
@@ -27,7 +26,14 @@ jobs:
       script: qgis-plugin-ci --version
 
 deploy:
-  provider: script
-  script: ./deploy.sh ${TRAVIS_TAG} ${GH_TOKEN}
-  on:
-    tags: true
+
+  - provider: releases
+    api_key: ${GH_TOKEN}
+    skip_cleanup: true
+    on:
+      tags: true
+
+  - provider: script
+    script: ./deploy.sh ${TRAVIS_TAG} ${GH_TOKEN}
+    on:
+      tags: true
