@@ -7,12 +7,15 @@ python:
 
 jobs:
   include:
-    - stage: Run tests
+    - stage: Run tests QGIS Desktop
+      env:
+        - FOO=QGIS_3.4
+        - FOO=QGIS_latest
       name: Job 1
       install:
         - pip3 install -r requirements.txt
-      script: qgis-plugin-ci --version
-    - name: Job 2
+      script: echo $FOO
+    - name: QGIS Server
       install:
         - pip3 install mock
       script: echo "Running job 2"
