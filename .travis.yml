@@ -7,14 +7,20 @@ python:
 
 jobs:
   include:
-  - name: Job 1
-    install:
-      - pip3 install -r requirements.txt
-    script: qgis-plugin-ci --version
-  - name: Job 2
-    install:
-      - pip3 install mock
-    script: echo "Running job 2"
+    - stage: Run tests
+      name: Job 1
+      install:
+        - pip3 install -r requirements.txt
+      script: qgis-plugin-ci --version
+    - name: Job 2
+      install:
+        - pip3 install mock
+      script: echo "Running job 2"
+    - stage: Deploy
+      name: Job 3
+      install:
+        - pip3 install -r requirements.txt
+      script: qgis-plugin-ci --version
 
 deploy:
   provider: script
