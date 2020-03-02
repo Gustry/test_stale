@@ -28,12 +28,13 @@ jobs:
       name: Yahoo
 
       before_deploy:
-        - export RELEASE_TITLE=$(date '+%Y%m%d%H%M%S')-$TRAVIS_JOB_NUMBER
+        # - export RELEASE_TITLE=$(date '+%Y%m%d%H%M%S')-$TRAVIS_JOB_NUMBER
         - export RELEASE_DESC=BLABLA
 
       deploy:
 
         - provider: releases
+          edge: true
           name: ${RELEASE_TITLE}
           release_notes: ${RELEASE_DESC}
           api_key: ${GH_TOKEN}
