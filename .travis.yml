@@ -29,12 +29,13 @@ jobs:
 
       before_deploy:
         - export RELEASE_TITLE=$(date '+%Y%m%d%H%M%S')-$TRAVIS_JOB_NUMBER
+        - export RELEASE_DESC=BLABLA
 
       deploy:
 
         - provider: releases
           name: ${RELEASE_TITLE}
-          release_notes: blabla
+          release_notes: ${RELEASE_DESC}
           api_key: ${GH_TOKEN}
           skip_cleanup: true
           on:
