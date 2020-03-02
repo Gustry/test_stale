@@ -27,8 +27,8 @@ jobs:
     - stage: Final deploy
       name: Yahoo
 
-      - before_deploy:
-          - export RELEASE_TITLE=$(date '+%Y%m%d%H%M%S')-$TRAVIS_JOB_NUMBER
+      before_deploy:
+        - export RELEASE_TITLE=$(date '+%Y%m%d%H%M%S')-$TRAVIS_JOB_NUMBER
 
       deploy:
 
