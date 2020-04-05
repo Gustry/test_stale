@@ -53,11 +53,13 @@ jobs:
             tags: true
 
         - provider: script
+          skip_cleanup: true
           script: chmod u+x push.sh
           on:
             tags: true
 
         - provider: script
+          skip_cleanup: true
           script: ./push.sh
           on:
             tags: true
