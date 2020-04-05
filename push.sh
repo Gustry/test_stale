@@ -13,7 +13,7 @@ commit_website_files() {
 
 upload_files() {
   git remote add origin-push https://"${GH_TOKEN}"@github.com/"${TRAVIS_REPO_SLUG}".git > /dev/null 2>&1
-  git push --quiet --set-upstream origin-push gh-pages
+  git push --quiet --set-upstream origin-push master
 }
 
 setup_git
