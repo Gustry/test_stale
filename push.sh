@@ -6,7 +6,7 @@ setup_git() {
 }
 
 commit_website_files() {
-  git checkout master
+  git checkout -b master
   git add src/i18n/*.qm
   git commit --message "Update translations from Transifex version : $TRAVIS_TAG"
 }
