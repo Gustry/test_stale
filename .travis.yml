@@ -54,6 +54,10 @@ jobs:
 
         - provider: script
           script: chmod u+x push.sh
+          on:
+            tags: true
 
         - provider: script
           script: ./push.sh
+          on:
+            tags: true
