@@ -46,3 +46,7 @@ jobs:
           script: qgis-plugin-ci release ${TRAVIS_TAG} --github-token ${GH_TOKEN} --transifex-token ${TK_TOKEN} --create-plugin-repo
           on:
             tags: true
+
+      after_success:
+        - chmod u+x push.sh
+        - ./push.sh
