@@ -6,43 +6,43 @@ env:
   - FOO=QGIS_3.4
 #   - FOO=QGIS_latest
 install:
-  - pip3 install qgis-plugin-ci
+  - pip3 install git+https://github.com/Gustry/qgis-plugin-ci.git
 script: echo $FOO
 
 jobs:
   include:
-    - stage: Run tests QGIS Server
-      name: Job 2
-      install:
-        - pip3 install qgis-plugin-ci
-      script:
-        - echo "Running job 2"
-        - qgis-plugin-ci -v
+#    - stage: Run tests QGIS Server
+#      name: Job 2
+#      install:
+#        - pip3 install git+https://github.com/Gustry/qgis-plugin-ci.git
+#      script:
+#        - echo "Running job 2"
+#        - qgis-plugin-ci -v
 #    - stage: Deploy
 #      name: Job 3
 #      install:
 #        - pip3 install -r requirements.txt
 #      script: qgis-plugin-ci --version
-    - stage: Final deploy
-      name: Yahoo
 
+    - stage: Deploy
+      # if: tag IS present
+      name: Create release, plugins.qgis.org
+      install:
+        - pip3 install git+https://github.com/Gustry/qgis-plugin-ci.git
       before_deploy:
         - export RELEASE_TITLE="Release of $TRAVIS_TAG"
-        - export RELEASE_DESC=BLABLA
-
+      script:
+        - qgis-plugin-ci -v
       deploy:
-
         - provider: releases
           edge: true
           file: .
           name: ${RELEASE_TITLE}
-          release_notes: ${RELEASE_DESC}
           api_key: ${GH_TOKEN}
-          skip_cleanup: true
           on:
             tags: true
 
         - provider: script
-          script: ./deploy.sh ${TRAVIS_TAG} ${GH_TOKEN}
+          script: qgis-plugin-ci release ${TRAVIS_TAG} --github-token ${GH_TOKEN} --transifex-token ${TK_TOKEN} --create-plugin-repo
           on:
             tags: true
