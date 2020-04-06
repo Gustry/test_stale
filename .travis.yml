@@ -37,6 +37,7 @@ jobs:
       before_deploy:
         - export RELEASE_TITLE="Release of $TRAVIS_TAG"
         - export BODY_COMMAND="qgis-plugin-ci changelog ${TRAVIS_TAG}"
+        - export BODY=eval ${BODY_COMMAND}
       script:
         - qgis-plugin-ci -v
       deploy:
@@ -44,7 +45,7 @@ jobs:
           edge: true
           file: .
           name: ${RELEASE_TITLE}
-          release_notes: eval ${BODY_COMMAND}
+          release_notes: ${BODY}
           api_key: ${GH_TOKEN}
           on:
             tags: true
