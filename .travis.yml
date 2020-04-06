@@ -43,6 +43,7 @@ jobs:
           edge: true
           file: .
           name: ${RELEASE_TITLE}
+          release_notes: qgis-plugin-ci changelog ${TRAVIS_TAG}
           api_key: ${GH_TOKEN}
           on:
             tags: true
