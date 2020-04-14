@@ -1,4 +1,3 @@
-# test_stale
-
+# Tests
 
 This is a test repository.
