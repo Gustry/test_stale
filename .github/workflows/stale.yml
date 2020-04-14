@@ -30,7 +30,4 @@ jobs:
             Please keep in mind that I’m only a robot, so if I’ve closed this issue in error, I’m `HUMAN_EMOTION_SORRY`. Please feel free to reopen this issue or create a new one if you need anything else.
             As a friendly reminder: the best way to see this issue, or any other, fixed is to open a Pull Request. Check out [gatsby.dev/contribute](https://www.gatsbyjs.org/contributing/how-to-contribute/) for more information about opening PRs, triaging issues, and contributing!
             Thanks again for being part of the Gatsby community! 💪💜
-          EXEMPT_ISSUE_LABELS:
-            - 'bug'
-            - 'feature'
-            - 'upstream'
+          EXEMPT_ISSUE_LABELS: 'bug,feature,upstream'
