@@ -35,9 +35,9 @@ jobs:
       install:
         - pip3 install git+https://github.com/Gustry/qgis-plugin-ci.git
       before_deploy:
-        - export RELEASE_TITLE="Release of $TRAVIS_TAG"
-        # - export BODY_COMMAND="qgis-plugin-ci changelog ${TRAVIS_TAG}"
-        # - export BODY=eval ${BODY_COMMAND}
+        - export RELEASE_TITLE="$TRAVIS_TAG"
+        - export BODY_COMMAND="qgis-plugin-ci changelog ${TRAVIS_TAG}"
+        - export BODY=eval ${BODY_COMMAND}
       script:
         - qgis-plugin-ci -v
       deploy:
@@ -45,19 +45,13 @@ jobs:
           edge: true
           file: .
           name: ${RELEASE_TITLE}
-          # release_notes: ${BODY}
+          release_notes: ${BODY}
           api_key: ${GH_TOKEN}
           on:
             tags: true
 
         - provider: script
           script: qgis-plugin-ci release ${TRAVIS_TAG} --github-token ${GH_TOKEN} --transifex-token ${TX_TOKEN} --create-plugin-repo --allow-uncommitted-changes
-          on:
-            tags: true
-
-        - provider: script
-          skip_cleanup: true
-          script: chmod u+x push.sh
           on:
             tags: true
 
