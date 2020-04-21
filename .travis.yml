@@ -41,17 +41,17 @@ jobs:
         - pip3 install git+https://github.com/Gustry/qgis-plugin-ci.git
       before_deploy:
         - export RELEASE_TITLE="$TRAVIS_TAG"
-        - BODY=eval qgis-plugin-ci changelog ${TRAVIS_TAG}
-        - export BODY
+        # - BODY=eval qgis-plugin-ci changelog ${TRAVIS_TAG}
+        # - export BODY
         # - export BODY=eval ${BODY_COMMAND}
       script:
-        - qgis-plugin-ci -v
+        - echo ${BODY}
       deploy:
         - provider: releases
           edge: true
           file: .
           name: ${RELEASE_TITLE}
-          release_notes: ${BODY}
+          release_notes: hello github
           api_key: ${GH_TOKEN}
           on:
             tags: true
