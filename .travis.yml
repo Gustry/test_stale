@@ -42,6 +42,7 @@ jobs:
       before_deploy:
         - export RELEASE_TITLE="$TRAVIS_TAG"
         - BODY=eval qgis-plugin-ci changelog ${TRAVIS_TAG}
+        - export ${BODY}
         # - export BODY=eval ${BODY_COMMAND}
       script:
         - qgis-plugin-ci -v
