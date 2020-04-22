@@ -13,7 +13,7 @@ jobs:
         id: stale
         uses: gatsbyjs/stale@0.1.0
         with:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
           DAYS_BEFORE_STALE: 1
           DAYS_BEFORE_CLOSE: 1
           OPERATIONS_PER_RUN: 5000
