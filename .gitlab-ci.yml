@@ -1,5 +1,5 @@
 variables:
-  PLUGIN_NAME: "minimal"  # Must match plugin metadata
+  PLUGIN_NAME: "minimal"  # Must match plugin metadata.txt
 
 image: python:3.7
 
