@@ -8,6 +8,7 @@ release:
   tags:
    - linux
   before_script:
-    - pip3 install git+https://github.com/Gustry/qgis-plugin-ci.git
+    - apt-get install -y python-dev python-pip3
+    - pip install git+https://github.com/Gustry/qgis-plugin-ci.git
   script:
     - qgis-plugin-ci package ${CI_COMMIT_TAG}
