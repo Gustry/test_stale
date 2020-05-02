@@ -5,8 +5,8 @@ release:
   stage: release
   only:
     - tags
-  # tags:
-  #  - factory
+  tags:
+   - linux
   before_script:
     - pip3 install git+https://github.com/Gustry/qgis-plugin-ci.git
   script:
