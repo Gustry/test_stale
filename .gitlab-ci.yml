@@ -12,6 +12,7 @@ release:
   tags:
    - factory
   before_script:
+    - ls -l src/metadata.txt
     - PATH=$PATH:/home/factory-runner/.local/bin
     - pip install git+https://github.com/Gustry/qgis-plugin-ci.git
   script:
