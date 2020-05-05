@@ -19,7 +19,6 @@ release:
     - curl --header 'Content-Type:application/json' --header "PRIVATE-TOKEN:${USER_TOKEN}" --data '{"name":"'"${CI_COMMIT_TAG}"'","ref":"'"${CI_COMMIT_TAG}"'","tag_name":"'"${CI_COMMIT_TAG}"'","assets":{"links":[{ "name":"QGIS Package", "url":"'"${CI_JOB_URL}"'/artifacts/file/'"${PLUGIN_NAME}"'.'"${CI_COMMIT_TAG}"'.zip" }] } }' --request POST https://projects.3liz.org/api/v4/projects/${PROJECT_ID}/releases
   artifacts:
     expose_as: 'package'
-    # Let empty for default value on the server gitlab
-    expire_in:
+    expire_in: 10 years
     paths:
       - ${PLUGIN_NAME}.${CI_COMMIT_TAG}.zip
