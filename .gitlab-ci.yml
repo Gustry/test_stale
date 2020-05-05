@@ -14,7 +14,7 @@ release:
   before_script:
     - ls -l src/metadata.txt
     - PATH=$PATH:/home/factory-runner/.local/bin
-    - pip install git+https://github.com/Gustry/qgis-plugin-ci.git
+    - pip install --upgrade --force-reinstall git+https://github.com/Gustry/qgis-plugin-ci.git
   script:
     - cat src/metadata.txt
     - qgis-plugin-ci package ${CI_COMMIT_TAG}
