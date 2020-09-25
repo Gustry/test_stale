@@ -19,7 +19,7 @@ lizmap_box:
       --data '{
       "id":330,
       "title":"Nouvelle version '"${FACTORY_PRODUCT_NAME}"' : '"${CI_COMMIT_REF_NAME}"'",
-      "description":"FYI : '"${CI_COMMIT_REF_NAME}"'"}'
+      "description":"FYI : nouvelle version '"${FACTORY_PRODUCT_NAME}"' '"${CI_COMMIT_REF_NAME}"' 👍"}'
       --request POST https://projects.3liz.org/api/v4/projects/330/issues
   tags:
     - factory
