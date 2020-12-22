@@ -20,7 +20,7 @@ jobs:
         id: create_release
         uses: actions/create-release@v1
         env:
-          GITHUB_TOKEN: ${{ CHANGELOG_URL }}
+          GITHUB_TOKEN: ${{ env.CHANGELOG_URL }}
         with:
           tag_name: ${{ github.ref }}
           release_name: ${{ github.ref }}
