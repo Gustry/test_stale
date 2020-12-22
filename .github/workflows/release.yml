@@ -14,16 +14,16 @@ jobs:
       - name: Prepare release URL
         run: |
           VERSION=$(echo ${{ github.ref }} | cut -d '-' -f 2 | cut -d '_' -f1,2 | sed 's/_/\./g')
-          echo "::set-env name=version_number::${VERSION}"
+          echo https://changelog.qgis.org/en/qgis/version/${VERSION} >> $CHANGELOG_URL
 
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ CHANGELOG_URL }}
         with:
           tag_name: ${{ github.ref }}
           release_name: ${{ github.ref }}
-          body: https://changelog.qgis.org/en/qgis/version/${env.version_number}
+          body: ${{ secrets.GITHUB_TOKEN }}
           draft: false
           prerelease: false
