@@ -11,6 +11,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
 
+      - name: Prepare release URL
+        run: |
+          VERSION=$(echo ${{ github.ref }} | cut -d '-' -f 2 | cut -d '_' -f1,2 | sed 's/_/\./g')
+          echo "::set-env name=version_number::${VERSION}"
+
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
@@ -19,5 +24,6 @@ jobs:
         with:
           tag_name: ${{ github.ref }}
           release_name: ${{ github.ref }}
+          body: https://changelog.qgis.org/en/qgis/version/${env.version_number}
           draft: false
           prerelease: false
