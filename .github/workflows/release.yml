@@ -11,6 +11,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
 
+      - name: Tweet
+        uses: mugi111/tweet-trigger-release@v1.1
+        with:
+          consumer_key: ${{ secrets.TWITTER_CONSUMER_KEY }}
+          consumer_secret: ${{ secrets.TWITTER_CONSUMER_SECRET }}
+          access_token_key: ${{ secrets.TWITTER_ACCESS_TOKEN_KEY }}
+          access_token_secret: ${{ secrets.TWITTER_ACCESS_TOKEN_SECRET }}
+          tweet_body: 'Hello'
+
       - name: Prepare release URL
         run: |
           VERSION_CHANGELOG=$(echo ${{ github.ref }} | cut -d '-' -f 2 | cut -d '_' -f1,2 | sed 's/_/\./g')

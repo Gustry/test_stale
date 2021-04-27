@@ -1,4 +1,10 @@
+# IDE
 .idea/
+
+# Python
+.venv/
+venv/
+
 test.zip
 minimal.*.zip
 src/i18n/*.ts

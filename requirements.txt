@@ -1,2 +1,3 @@
 qgis-plugin-ci
 hub
+tweepy
