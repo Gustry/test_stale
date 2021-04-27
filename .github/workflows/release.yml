@@ -3,7 +3,7 @@ name: Release 🚀
 on:
   push:
     tags:
-      - 'final-*_*_*'
+      - "*.*.*"
 
 jobs:
   build:
