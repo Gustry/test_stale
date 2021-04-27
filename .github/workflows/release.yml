@@ -18,7 +18,7 @@ jobs:
           consumer_secret: ${{ secrets.TWITTER_CONSUMER_SECRET }}
           access_token_key: ${{ secrets.TWITTER_ACCESS_TOKEN_KEY }}
           access_token_secret: ${{ secrets.TWITTER_ACCESS_TOKEN_SECRET }}
-          tweet_body: 'Nouvelle version ${GITHUB_REF/refs\/tags\//} de PgMetadata 🚀 https://docs.3liz.org/qgis-pgmetadata-plugin/changelog/'
+          tweet_body: 'Nouvelle version ${{ GITHUB_REF/refs\/tags\// }} de PgMetadata 🚀 https://docs.3liz.org/qgis-pgmetadata-plugin/changelog/'
 
       - name: Prepare release URL
         run: |
