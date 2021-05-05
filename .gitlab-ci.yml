@@ -6,6 +6,19 @@ variables:
 stages:
 - 🚀 Release
 
+tickets:
+  stage: 🚀 Release
+  image:
+    name: registry.snap.lizlan:5000/infra/ci-tools
+  variables:
+    DEBUG: "True"
+  script:
+    - pwd
+    - ls -al
+    # - create_ticket.py product_name version_number ${GITLAB_SLUG} ${CI_PIPELINE_ID} ${USER_TOKEN}
+  tags:
+    - factory-plain
+
 lizmap_box:
   stage: 🚀 Release
   allow_failure: true
