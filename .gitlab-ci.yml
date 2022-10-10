@@ -9,7 +9,7 @@ stages:
 tickets:
   stage: 🚀 Release
   image:
-    name: registry.snap.lizlan:5000/infra/ci-tools
+    name: $REGISTRY_URI/infra/ci-tools
   variables:
     DEBUG: "True"
   script:
