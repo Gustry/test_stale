@@ -1,0 +1,51 @@
+name: "🔤 Test comment"
+
+on:
+  push:
+    branches:
+      - master
+      - release_3_*
+  pull_request:
+    branches:
+      - master
+      - release_3_*
+
+jobs:
+  comment:
+    name: "Comment"
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Log
+      run: echo ${{ github.event_name }}
+
+    - name: Trigger failure
+      # continue-on-error: true
+      id: test-cypress
+      run: |
+        exit 1
+
+    - name: Trigger success
+      id: test-success
+      run: |
+        exit 0
+
+    - name: Notify in case of failure
+      uses: peter-evans/commit-comment@v2
+      # We might need to check if the owner is 3liz as well
+      # && github.event_name == 'pull'
+      #       if: failure() && steps.test-app.outcome != 'success'
+      if: failure() && steps.test-cypress.outcome != 'success' && github.event_name == 'push'
+      with:
+        body: |
+          The latest run of end2end tests failed with this latest commit on the branch ${{ env.BRANCH }} 😣
+          CC @Gustry, please have a look 💪
+
+          Have a look to your current version of PHP Stan like :
+
+          ➡ `docker exec CONTAINER_test_php tests/units/vendor/phpstan/phpstan/phpstan -V`
+
+          > And update if needed :
+
+          ➡ `./limap-ctl composer-update`
