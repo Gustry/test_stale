@@ -22,9 +22,9 @@ def parse_branch(branch: str, milestones_available: list) -> Optional[packaging.
         print(e)
 
 
-def all_gh_milestones(token: str, owner: str, repo: str):
+def all_gh_milestones(token: str, repo: str):
     r = requests.get(
-        f"https://api.github.com/repos/{owner}/{repo}/milestones",
+        f"https://api.github.com/repos/{repo}/milestones",
         headers={
             'Authorization': f'Bearer {token}'
         }
@@ -45,8 +45,8 @@ def all_gh_milestones(token: str, owner: str, repo: str):
 
 if __name__ == "__main__":
     args = sys.argv[1:]
-    gh_milestones, gh_milestones_object = all_gh_milestones(token=args[0], owner=args[1], repo=args[2])
-    final_milestone = parse_branch(args[3], gh_milestones)
+    gh_milestones, gh_milestones_object = all_gh_milestones(token=args[0], repo=args[1])
+    final_milestone = parse_branch(args[2], gh_milestones)
 
     milestone_id = None
     for milestone in gh_milestones_object:

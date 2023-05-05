@@ -22,13 +22,13 @@ jobs:
 
       - name: Get milestone
         id: milestone
-        run: ./.github/auto-milestone.py ${{ secrets.GITHUB_TOKEN }} ${{ github.repository_owner }} ${{ github.repository }} ${{ github.event.pull_request.base.ref }}
+        run: ./.github/auto-milestone.py ${{ secrets.GITHUB_TOKEN }} ${{ github.repository }} ${{ github.event.pull_request.base.ref }}
 
       - name: update PR milestone
         uses: octokit/request-action@v2.x
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          route: PATCH /repos/${{ github.repository_owner }}/${{ github.repository }}/issues/:pull_number
+          route: PATCH /repos/${{ github.repository }}/issues/:pull_number
           pull_number: ${{github.event.number}}
           milestone: ${{ steps.changelog.outputs.milestone_number }}
