@@ -30,6 +30,6 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          route: PATCH /repos/${{ github.repository }}/issues/:pull_number
+          route: PATCH /repos/${{ github.repository }}/issues/${{github.event.number}}
           pull_number: ${{github.event.number}}
-          milestone: ${{ steps.changelog.outputs.milestone_number }}
+          milestone: ${{ steps.milestone.outputs.milestone_number }}

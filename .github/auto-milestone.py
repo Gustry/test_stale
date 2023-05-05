@@ -57,4 +57,6 @@ if __name__ == "__main__":
     if not milestone_id:
         exit(0)
 
-    print(milestone_id)
+    import os
+    with open(os.environ['GITHUB_OUTPUT'], 'a') as fh:
+        print(f'milestone_number={milestone_id}', file=fh)
