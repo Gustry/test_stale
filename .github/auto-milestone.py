@@ -1,9 +1,10 @@
 #!/usr/bin/python3
 
-import sys
+import os
+import requests
+
 from typing import Optional
 
-import requests
 from pkg_resources.extern import packaging
 
 
@@ -44,9 +45,9 @@ def all_gh_milestones(token: str, repo: str):
 
 
 if __name__ == "__main__":
-    args = sys.argv[1:]
-    gh_milestones, gh_milestones_object = all_gh_milestones(token=args[0], repo=args[1])
-    final_milestone = parse_branch(args[2], gh_milestones)
+    gh_milestones, gh_milestones_object = all_gh_milestones(
+        token=os.getenv("GITHUB_TOKEN"), repo=os.getenv("GITHUB_REPOSITORY"))
+    final_milestone = parse_branch(os.getenv("GITHUB_BASE"), gh_milestones)
 
     milestone_id = None
     for milestone in gh_milestones_object:
@@ -57,6 +58,5 @@ if __name__ == "__main__":
     if not milestone_id:
         exit(0)
 
-    import os
     with open(os.environ['GITHUB_OUTPUT'], 'a') as fh:
         print(f'milestone_number={milestone_id}', file=fh)

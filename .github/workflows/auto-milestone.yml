@@ -9,7 +9,7 @@ on:
 jobs:
   pr-without-milestones:
     runs-on: ubuntu-latest
-#    if: github.repository == 'qgis/QGIS'
+#    if: github.repository == '3liz/lizmap-web-client'
     steps:
       - uses: actions/checkout@v3
         with:
@@ -23,7 +23,11 @@ jobs:
 
       - name: Get milestone
         id: milestone
-        run: ./.github/auto-milestone.py ${{ secrets.GITHUB_TOKEN }} ${{ github.repository }} ${{ github.event.pull_request.base.ref }}
+        run: ./.github/auto-milestone.py
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+          GITHUB_BASE: ${{ github.event.pull_request.base.ref }}
 
       - name: update PR milestone
         uses: octokit/request-action@v2.x
