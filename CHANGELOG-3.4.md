@@ -1,4 +1,4 @@
-# Changelog Lizmap 3.4
+# Changelog Lizmap 3.4 HI
 
 ## 3.4.6 - 2021-09-21
 
