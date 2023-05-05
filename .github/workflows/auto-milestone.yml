@@ -1,0 +1,34 @@
+name: 📅 Auto set milestone on PR
+
+on:
+  pull_request_target:
+    types:
+      - opened
+
+jobs:
+  pr-without-milestones:
+    runs-on: ubuntu-latest
+#    if: github.repository == 'qgis/QGIS'
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          ref: 'master'
+          fetch-depth: 0
+
+      - name: Set up Python 3.10
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Get milestone
+        id: milestone
+        run: ./.github/auto-milestone.py ${{ secrets.GITHUB_TOKEN }} ${{ github.repository_owner }} ${{ github.repository }} ${{ github.event.pull_request.base.ref }}
+
+      - name: update PR milestone
+        uses: octokit/request-action@v2.x
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          route: PATCH /repos/${{ github.repository_owner }}/${{ github.repository }}/issues/:pull_number
+          pull_number: ${{github.event.number}}
+          milestone: ${{ steps.changelog.outputs.milestone_number }}
